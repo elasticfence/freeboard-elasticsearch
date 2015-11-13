@@ -1,7 +1,7 @@
 # freeboard-elasticsearch
-Example [Freeboard](https://github.com/Freeboard/freeboard) dashboards for [Elasticsearch](https://github.com/elastic/elasticsearch)
+Example [Freeboard](https://github.com/Freeboard/freeboard) dashboards for [Elasticsearch](https://github.com/elastic/elasticsearch) ... for science
 
-## Example
+#### Config Loading Example
 
 <pre>
 freeboard.initialize(true);
@@ -11,3 +11,5 @@ freeboard.initialize(true);
     });
   });
 </pre>
+
+![](http://i.imgur.com/CvN5Zfl.png)
