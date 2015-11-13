@@ -1,0 +1,235 @@
+{
+	"version": 1,
+	"allow_edit": true,
+	"plugins": [],
+	"panes": [
+		{
+			"title": "Cluster",
+			"width": 1,
+			"row": {
+				"3": 1,
+				"4": 1
+			},
+			"col": {
+				"3": 1,
+				"4": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Name",
+						"size": "regular",
+						"value": "datasources[\"Cluster\"][\"cluster_name\"]",
+						"animate": false
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"title": "Status",
+						"value": "var status = datasources[\"Cluster\"][\"status\"];\n\nif (status === \"green\") {\n    return 0;\n} else {\n    return 1;\n}",
+						"on_text": "var status = datasources[\"Cluster\"][\"status\"];\n\nreturn \"Alarmed! (\"+status+\")\";",
+						"off_text": "var status = datasources[\"Cluster\"][\"status\"];\n\nreturn \"No Alarms (\"+status+\")\";"
+					}
+				},
+				{
+					"type": "sparkline",
+					"settings": {
+						"title": "Query Time",
+						"value": "datasources[\"Search Ping\"][\"took\"]"
+					}
+				},
+				{
+					"type": "sparkline",
+					"settings": {
+						"title": "Stats",
+						"value": [
+							"datasources[\"Cluster\"][\"indices\"][\"shards\"][\"index\"][\"shards\"][\"max\"]",
+							"datasources[\"Cluster\"][\"indices\"][\"shards\"][\"index\"][\"primaries\"][\"max\"]",
+							"datasources[\"Cluster\"][\"indices\"][\"shards\"][\"index\"][\"replication\"][\"max\"]"
+						],
+						"include_legend": true,
+						"legend": "total,primaries,replication"
+					}
+				},
+				{
+					"type": "sparkline",
+					"settings": {
+						"title": "Active Shards",
+						"value": [
+							"datasources[\"Cluster\"][\"indices\"][\"shards\"][\"total\"]"
+						]
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Nodes",
+						"size": "regular",
+						"value": "datasources[\"Cluster\"][\"nodes\"][\"count\"][\"total\"]",
+						"sparkline": true,
+						"animate": true
+					}
+				}
+			]
+		},
+		{
+			"title": "Node 1",
+			"width": 1,
+			"row": {
+				"3": 1,
+				"4": 1
+			},
+			"col": {
+				"3": 2,
+				"4": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Node Name",
+						"size": "regular",
+						"value": "datasources[\"Nodes\"][\"nodes\"][0][\"name\"]",
+						"animate": true
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "CPU Load",
+						"size": "regular",
+						"value": "return datasources[\"Nodes\"][\"nodes\"][0][\"os\"][\"load_average\"][0]+ \", \"+\ndatasources[\"Nodes\"][\"nodes\"][\"4PaZIa0BR6ifoF0I3YiRHQ\"][\"os\"][\"load_average\"][1]+ \", \"+\ndatasources[\"Nodes\"][\"nodes\"][\"4PaZIa0BR6ifoF0I3YiRHQ\"][\"os\"][\"load_average\"][2];",
+						"animate": false
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"title": "Swap Usage",
+						"value": "datasources[\"Nodes\"][\"nodes\"][0][\"os\"][\"swap\"][\"used_in_bytes\"]",
+						"on_text": "SWAP DETECTED!",
+						"off_text": "No Swap"
+					}
+				},
+				{
+					"type": "sparkline",
+					"settings": {
+						"title": "CPU Usage",
+						"value": [
+							"datasources[\"Nodes\"][\"nodes\"][0][\"os\"][\"cpu\"][\"usage\"]",
+							"datasources[\"Nodes\"][\"nodes\"][0][\"os\"][\"cpu\"][\"sys\"]",
+							"datasources[\"Nodes\"][\"nodes\"][0][\"os\"][\"cpu\"][\"user\"]"
+						],
+						"include_legend": true,
+						"legend": "usage,sys,user"
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Doc Count",
+						"size": "regular",
+						"value": [
+							"datasources[\"Indices\"][\"nodes\"][0][\"indices\"][\"docs\"][\"count\"]"
+						],
+						"sparkline": true,
+						"animate": true
+					}
+				}
+			]
+		},
+		{
+			"width": 1,
+			"row": {
+				"3": 1,
+				"4": 1
+			},
+			"col": {
+				"3": 3,
+				"4": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "gauge",
+					"settings": {
+						"title": "CPU",
+						"value": "datasources[\"Nodes\"][\"nodes\"][0][\"process\"][\"cpu\"][\"percent\"]",
+						"units": "%",
+						"min_value": 0,
+						"max_value": 100
+					}
+				},
+				{
+					"type": "gauge",
+					"settings": {
+						"title": "Heap %",
+						"value": "datasources[\"Nodes\"][\"nodes\"][0][\"jvm\"][\"mem\"][\"heap_used_percent\"]",
+						"units": "%",
+						"min_value": 0,
+						"max_value": 100
+					}
+				},
+				{
+					"type": "sparkline",
+					"settings": {
+						"title": "Thread Count",
+						"value": [
+							"datasources[\"Nodes\"][\"nodes\"][0][\"jvm\"][\"threads\"][\"count\"]",
+							"datasources[\"Nodes\"][\"nodes\"][0][\"jvm\"][\"threads\"][\"peak_count\"]"
+						],
+						"include_legend": true,
+						"legend": "count,peak"
+					}
+				}
+			]
+		}
+	],
+	"datasources": [
+		{
+			"name": "Cluster",
+			"type": "JSON",
+			"settings": {
+				"url": "http://127.0.0.1:9200/_cluster/stats",
+				"use_thingproxy": false,
+				"refresh": 15,
+				"method": "GET"
+			}
+		},
+		{
+			"name": "Nodes",
+			"type": "JSON",
+			"settings": {
+				"url": "http://127.0.0.1:9200/_nodes/stats/",
+				"use_thingproxy": false,
+				"refresh": 30,
+				"method": "GET"
+			}
+		},
+		{
+			"name": "Search Ping",
+			"type": "JSON",
+			"settings": {
+				"url": "http://127.0.0.1:9200/_search?size=0",
+				"use_thingproxy": false,
+				"refresh": 30,
+				"method": "GET"
+			}
+		},
+		{
+			"name": "Indices",
+			"type": "JSON",
+			"settings": {
+				"url": "http://127.0.0.1:9200/_nodes/stats/indices/docs,get,search",
+				"use_thingproxy": false,
+				"refresh": 30,
+				"method": "GET"
+			}
+		}
+	],
+	"columns": 3
+}
