@@ -18,7 +18,7 @@ freeboard.initialize(true);
   });
 </pre>
 
-![](http://i.imgur.com/GhgKOVW.png)
+![](http://i.imgur.com/GhgKOVW.png?1)
 
 
 ## Todo
