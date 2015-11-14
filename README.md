@@ -7,15 +7,9 @@ Simple [Freeboard](https://github.com/Freeboard/freeboard) dashboards plugin for
 ./elasticsearch/bin/plugin install lmangani/freeboard-elasticsearch/
 </pre>
 
-#### Config Loading Example
-
+## Usage:
 <pre>
-freeboard.initialize(true);
-  $.getJSON('path/to/freeboard.config.json', function(data) {
-    freeboard.loadDashboard(data, function() {
-      freeboard.setEditing(true);
-    });
-  });
+http://127.0.0.1:9200/_plugin/freeboard-elasticsearch/
 </pre>
 
 ![](http://i.imgur.com/GhgKOVW.png?1)
