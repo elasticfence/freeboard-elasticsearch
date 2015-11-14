@@ -24,6 +24,7 @@ freeboard.initialize(true);
 ## Todo
 
 * implement save/load to elasticsearch index
+* implement dynamic node stats display
 * create meaningful dashboards ;)
 
 ## Interested?
