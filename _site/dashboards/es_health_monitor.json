@@ -4,7 +4,7 @@
 	"plugins": [],
 	"panes": [
 		{
-			"title": "Cluster",
+			"title": "CLUSTER STATS",
 			"width": 1,
 			"row": {
 				"3": 1,
@@ -13,6 +13,146 @@
 			"col": {
 				"3": 1,
 				"4": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "list",
+					"settings": {
+						"title": "",
+						"show_header": true,
+						"replace_value": "-",
+						"value": "datasources[\"Cluster\"][\"indices\"][\"shards\"]"
+					}
+				},
+				{
+					"type": "list",
+					"settings": {
+						"show_header": true,
+						"value": "datasources[\"Cluster\"][\"indices\"][\"docs\"]"
+					}
+				},
+				{
+					"type": "list",
+					"settings": {
+						"show_header": true,
+						"value": "datasources[\"Cluster\"][\"indices\"][\"store\"]"
+					}
+				},
+				{
+					"type": "list",
+					"settings": {
+						"title": "",
+						"show_header": true,
+						"value": "datasources[\"Cluster\"][\"nodes\"][\"fs\"]"
+					}
+				},
+				{
+					"type": "list",
+					"settings": {
+						"title": "",
+						"show_header": true,
+						"value": "datasources[\"Cluster\"][\"indices\"][\"query_cache\"]"
+					}
+				}
+			]
+		},
+		{
+			"title": "Node 1",
+			"width": 1,
+			"row": {
+				"3": 1,
+				"4": 7,
+				"5": 1
+			},
+			"col": {
+				"3": 3,
+				"4": 2,
+				"5": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Name",
+						"size": "regular",
+						"value": "var set =  datasources[\"Nodes\"][\"nodes\"];return set[Object.keys(set)[0]][\"name\"]",
+						"animate": true
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Storage",
+						"size": "regular",
+						"value": "var set =  datasources[\"Nodes\"][\"nodes\"];var data = set[Object.keys(set)[0]][\"fs\"][\"data\"][0];\nvar free = parseInt(data[\"free_in_bytes\"] * 100 / data[\"total_in_bytes\"]);\nvar i = Math.floor( Math.log(data[\"total_in_bytes\"]) / Math.log(1024) );\nvar human = ( data[\"total_in_bytes\"] / Math.pow(1024, i) ).toFixed(2) * 1 + ' ' + ['B', 'kB', 'MB', 'GB', 'TB'][i];\nreturn human +\" (\"+free+\"% free)\";",
+						"sparkline": false,
+						"animate": false
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"title": "Swap Usage",
+						"value": "var set =  datasources[\"Nodes\"][\"nodes\"];return set[Object.keys(set)[0]][\"os\"][\"swap\"][\"used_in_bytes\"];",
+						"on_text": "var set = datasources[\"Nodes\"][\"nodes\"];\nvar i = Math.floor( Math.log(set[Object.keys(set)[0]][\"os\"][\"swap\"][\"used_in_bytes\"]) / Math.log(1024) );\nvar human = ( (set[Object.keys(set)[0]][\"os\"][\"swap\"][\"used_in_bytes\"]) / Math.pow(1024, i) ).toFixed(2) * 1 + ' ' + ['B', 'kB', 'MB', 'GB', 'TB'][i];\nreturn \"SWAP ON! (\"+human+\")\";",
+						"off_text": "No Swap"
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "CPU Usage",
+						"size": "regular",
+						"value": "var set =  datasources[\"Nodes\"][\"nodes\"];return set[Object.keys(set)[0]][\"process\"][\"cpu\"][\"percent\"]",
+						"animate": false,
+						"units": "%"
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Doc Count",
+						"size": "regular",
+						"value": "var set =  datasources[\"Nodes\"][\"nodes\"];return set[Object.keys(set)[0]][\"indices\"][\"docs\"].count;",
+						"sparkline": true,
+						"animate": false
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Heap Usage",
+						"size": "regular",
+						"value": "var set =  datasources[\"Nodes\"][\"nodes\"];return set[Object.keys(set)[0]][\"jvm\"][\"mem\"][\"heap_used_percent\"];",
+						"animate": true,
+						"units": "%"
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "JVM Threads",
+						"size": "regular",
+						"value": "var set =  datasources[\"Nodes\"][\"nodes\"];\nreturn set[Object.keys(set)[0]][\"jvm\"][\"threads\"].count+\" (\"+set[Object.keys(set)[0]][\"jvm\"][\"threads\"].count+\" peak)\";",
+						"animate": true
+					}
+				}
+			]
+		},
+		{
+			"title": "Cluster Details",
+			"width": 1,
+			"row": {
+				"3": 1,
+				"4": 7,
+				"5": 1
+			},
+			"col": {
+				"3": 2,
+				"4": 1,
+				"5": 1
 			},
 			"col_width": 1,
 			"widgets": [
@@ -59,131 +199,31 @@
 					"settings": {
 						"title": "Active Shards",
 						"value": [
-							"datasources[\"Cluster\"][\"indices\"][\"shards\"][\"total\"]"
-						]
-					}
-				},
-				{
-					"type": "text_widget",
-					"settings": {
-						"title": "Nodes",
-						"size": "regular",
-						"value": "datasources[\"Cluster\"][\"nodes\"][\"count\"][\"total\"]",
-						"sparkline": true,
-						"animate": true
+							"datasources[\"Cluster\"][\"indices\"][\"shards\"][\"total\"]",
+							"datasources[\"Cluster\"][\"nodes\"][\"count\"][\"total\"]"
+						],
+						"include_legend": true,
+						"legend": "shards, nodes"
 					}
 				}
 			]
 		},
 		{
-			"title": "Node 1",
+			"title": "Node List",
 			"width": 1,
 			"row": {
-				"3": 1,
-				"4": 1
+				"3": 13
 			},
 			"col": {
-				"3": 2,
-				"4": 2
+				"3": 1
 			},
 			"col_width": 1,
 			"widgets": [
 				{
-					"type": "text_widget",
+					"type": "list",
 					"settings": {
-						"title": "Node Name",
-						"size": "regular",
-						"value": "var set =  datasources[\"Nodes\"][\"nodes\"];return set[Object.keys(set)[0]][\"name\"]",
-						"animate": true
-					}
-				},
-				{
-					"type": "text_widget",
-					"settings": {
-						"title": "CPU Load",
-						"size": "regular",
-						"value": "var set =  datasources[\"Nodes\"][\"nodes\"];return set[Object.keys(set)[0]][\"os\"][\"load_average\"][0]+ \", \"+\nset[Object.keys(set)[0]][\"os\"][\"load_average\"][1]+ \", \"+\nset[Object.keys(set)[0]][\"os\"][\"load_average\"][2];",
-						"animate": false
-					}
-				},
-				{
-					"type": "indicator",
-					"settings": {
-						"title": "Swap Usage",
-						"value": "var set =  datasources[\"Nodes\"][\"nodes\"];return set[Object.keys(set)[0]][\"os\"][\"swap\"][\"used_in_bytes\"]",
-						"on_text": "SWAP DETECTED!",
-						"off_text": "No Swap"
-					}
-				},
-				{
-					"type": "sparkline",
-					"settings": {
-						"title": "CPU Usage",
-						"value": [
-							"var set =  datasources[\"Nodes\"][\"nodes\"];return set[Object.keys(set)[0]][\"os\"][\"cpu\"][\"usage\"]",
-							"var set =  datasources[\"Nodes\"][\"nodes\"];return set[Object.keys(set)[0]][\"os\"][\"cpu\"][\"sys\"]",
-							"var set =  datasources[\"Nodes\"][\"nodes\"];return set[Object.keys(set)[0]][\"os\"][\"cpu\"][\"user\"]"
-						],
-						"include_legend": true,
-						"legend": "usage,sys,user"
-					}
-				},
-				{
-					"type": "text_widget",
-					"settings": {
-						"title": "Doc Count",
-						"size": "regular",
-						"value": [
-							"var set =  datasources[\"Indices\"][\"nodes\"];return set[Object.keys(set)[0]][\"indices\"][\"docs\"][\"count\"]"
-						],
-						"sparkline": true,
-						"animate": true
-					}
-				}
-			]
-		},
-		{
-			"width": 1,
-			"row": {
-				"3": 1,
-				"4": 1
-			},
-			"col": {
-				"3": 3,
-				"4": 3
-			},
-			"col_width": 1,
-			"widgets": [
-				{
-					"type": "gauge",
-					"settings": {
-						"title": "CPU",
-						"value": "var set =  datasources[\"Nodes\"][\"nodes\"];return set[Object.keys(set)[0]][\"process\"][\"cpu\"][\"percent\"]",
-						"units": "%",
-						"min_value": 0,
-						"max_value": 100
-					}
-				},
-				{
-					"type": "gauge",
-					"settings": {
-						"title": "Heap %",
-						"value": "var set =  datasources[\"Nodes\"][\"nodes\"];return set[Object.keys(set)[0]][\"jvm\"][\"mem\"][\"heap_used_percent\"]",
-						"units": "%",
-						"min_value": 0,
-						"max_value": 100
-					}
-				},
-				{
-					"type": "sparkline",
-					"settings": {
-						"title": "Thread Count",
-						"value": [
-							"var set =  datasources[\"Nodes\"][\"nodes\"];return set[Object.keys(set)[0]][\"jvm\"][\"threads\"][\"count\"]",
-							"var set =  datasources[\"Nodes\"][\"nodes\"];return set[Object.keys(set)[0]][\"jvm\"][\"threads\"][\"peak_count\"]"
-						],
-						"include_legend": true,
-						"legend": "count,peak"
+						"show_header": true,
+						"value": "datasources[\"Nodes\"][\"nodes\"]"
 					}
 				}
 			]
@@ -196,8 +236,9 @@
 			"settings": {
 				"url": "/_cluster/stats",
 				"use_thingproxy": false,
-				"refresh": 15,
-				"method": "GET"
+				"refresh": 30,
+				"method": "GET",
+				"name": "Cluster"
 			}
 		},
 		{
@@ -207,7 +248,8 @@
 				"url": "/_nodes/stats/",
 				"use_thingproxy": false,
 				"refresh": 30,
-				"method": "GET"
+				"method": "GET",
+				"name": "Nodes"
 			}
 		},
 		{
