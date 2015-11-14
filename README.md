@@ -19,3 +19,12 @@ freeboard.initialize(true);
 </pre>
 
 ![](http://i.imgur.com/CvN5Zfl.png)
+
+
+## Todo
+
+* implement save/load to elasticsearch index
+* create meaningful dashboards ;)
+
+## Interested?
+Join by contributing ideas, dashboards json or bug reports!
