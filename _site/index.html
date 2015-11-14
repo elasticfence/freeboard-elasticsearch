@@ -39,7 +39,7 @@
                 "plugins/freeboard/freeboard.widgets.js",
 
                 "plugins/thirdparty/widget.tables.js",
-                "examples/plugin_example.js",
+              //  "examples/plugin_example.js",
 
                 // *** Load more plugins here ***
                 function(){
@@ -47,11 +47,20 @@
                     { //DOM Ready
 			freeboard.setAssetRoot("/freeboard-ui/");
                         freeboard.initialize(true);
+                        var hashpattern = window.location.hash.match(/(&|#)source=([^&]+)/);
+                        if (hashpattern !== null) {
+                            $.getJSON('dashboards/'+hashpattern[2], function(data) {
+                                freeboard.loadDashboard(data, function() {
+                                    freeboard.setEditing(false);
+                                });
+                            });
+                        } else {
                             $.getJSON('dashboards/es_health_monitor.json', function(data) {
                                 freeboard.loadDashboard(data, function() {
                                     freeboard.setEditing(false);
                                 });
                             });
+                        }
                     });
                 });
     </script>
