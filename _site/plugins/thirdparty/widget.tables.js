@@ -36,19 +36,18 @@
 		}
 
 
-		console.log('object:', stateObject);
+		// console.log('object:', stateObject);
 		if (stateObject.value) {
 			var tabledata = { value: {} };
 			tabledata.value.data = [stateObject.value];
 			tabledata.value.header = [];
 			for(var k in stateObject.value) tabledata['value']['header'].unshift(k);
-			console.log(tabledata);
+			// console.log(tabledata);
 		}
 			
 			//only proceed if we have a valid JSON object
 		if (tabledata && tabledata.value && tabledata.value.header && tabledata.value.data) {
 
-		console.log('ok');
 				var headerRow = $('<tr/>');
 				var templateRow = $('<tr/>');
 				var rowHTML;
