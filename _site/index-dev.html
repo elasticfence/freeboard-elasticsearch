@@ -37,14 +37,21 @@
 
                 "plugins/freeboard/freeboard.datasources.js",
                 "plugins/freeboard/freeboard.widgets.js",
+
+                "plugins/thirdparty/widget.tables.js",
                 "examples/plugin_example.js",
 
                 // *** Load more plugins here ***
                 function(){
                     $(function()
                     { //DOM Ready
-						freeboard.setAssetRoot("/freeboard-ui/");
+			freeboard.setAssetRoot("/freeboard-ui/");
                         freeboard.initialize(true);
+                            $.getJSON('dashboards/es_health_monitor.json', function(data) {
+                                freeboard.loadDashboard(data, function() {
+                                    freeboard.setEditing(false);
+                                });
+                            });
                     });
                 });
     </script>

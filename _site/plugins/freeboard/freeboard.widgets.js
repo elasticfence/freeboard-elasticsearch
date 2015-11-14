@@ -240,7 +240,7 @@
 				unitsElement.hide();
 			}
 
-			var valueFontSize = 30;
+			var valueFontSize = 20;
 
 			if(newSettings.size == "big")
 			{
