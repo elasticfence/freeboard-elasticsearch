@@ -70,7 +70,14 @@
 					$.each(tabledata.value.data, function(k, v){
 						rowHTML = templateRow.clone();						
 						$.each(v, function(dataKey, dataValue){									
-							rowHTML.find('.' + classObject[dataKey]).html(dataValue);
+						   if(dataKey.toLowerCase().indexOf("byte") !=-1) {
+                                                        var i = Math.floor( Math.log(dataValue) / Math.log(1024) );
+                                                        dataValue = ( dataValue / Math.pow(1024, i) ).toFixed(2) * 1 + ' ' + ['B', 'kB', 'MB', 'GB', 'TB'][i];
+                                                        rowHTML.find('.' + classObject[dataKey]).html(dataValue);
+                                                   } else {
+                                                        rowHTML.find('.' + classObject[dataKey]).html(dataValue);
+                                                   }
+
 						})
 						bodyHTML.append(rowHTML);
 					})
