@@ -49,11 +49,42 @@
                         freeboard.initialize(true);
                         var hashpattern = window.location.hash.match(/(&|#)source=([^&]+)/);
                         if (hashpattern !== null) {
-                            $.getJSON('dashboards/'+hashpattern[2], function(data) {
-                                freeboard.loadDashboard(data, function() {
-                                    freeboard.setEditing(false);
-                                });
+                            console.log('Loading '+hashpattern[2]);
+                            // load from elasticsearch
+                            $.ajax({
+                                    type:"GET",
+                                    dataType:"json",
+                                    url:"/freeboard/dashboards/"+hashpattern[2],
+                                    success:function (data) {
+                                        console.log('ES-DASH:',data._source);
+                                                freeboard.loadDashboard(data._source, function() {
+                                                    freeboard.setEditing(false);
+                                                });
+                                        return;
+                                    },
+                                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                        // console.log("Status: " + textStatus+", " + errorThrown);
+
+                                            // load from filesystem
+                                            $.getJSON('dashboards/'+hashpattern[2]+'.json', function(data) {
+                                                freeboard.loadDashboard(data, function() {
+                                                    freeboard.setEditing(false);
+							/*
+                                                        // Save Dashboard to ES
+                                                       	$.ajax({
+                                                          url: '/freeboard/dashboards/'+hashpattern[2],
+                                                          type: 'POST',
+                                                          data: JSON.stringify(data),
+                                                          success: function(data) {
+                                                            console.log('Dashboards saved to ES!')
+                                                          }
+                                                       	});
+                                                	*/
+                                               	});
+                                            });
+                                    }
                             });
+
                         } else {
                             $.getJSON('dashboards/es_health_monitor.json', function(data) {
                                 freeboard.loadDashboard(data, function() {
