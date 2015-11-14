@@ -1,5 +1,11 @@
 # freeboard-elasticsearch
-Example [Freeboard](https://github.com/Freeboard/freeboard) dashboards for [Elasticsearch](https://github.com/elastic/elasticsearch) ... for science
+Simple [Freeboard](https://github.com/Freeboard/freeboard) dashboards plugin for [Elasticsearch](https://github.com/elastic/elasticsearch) _(experimental)_
+
+
+## Installing on an Elasticsearch instance:
+<pre>
+./elasticsearch/bin/plugin install lmangani/freeboard-elasticsearch/
+</pre>
 
 #### Config Loading Example
 
