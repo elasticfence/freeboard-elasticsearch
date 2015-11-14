@@ -1,6 +1,7 @@
 {
 	"version": 1,
 	"allow_edit": true,
+	"header_image" : "http://i.imgur.com/P9b3wCm.png",
 	"plugins": [],
 	"panes": [
 		{
