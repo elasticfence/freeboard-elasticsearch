@@ -194,7 +194,7 @@
 			"name": "Cluster",
 			"type": "JSON",
 			"settings": {
-				"url": "http://127.0.0.1:9200/_cluster/stats",
+				"url": "/_cluster/stats",
 				"use_thingproxy": false,
 				"refresh": 15,
 				"method": "GET"
@@ -204,7 +204,7 @@
 			"name": "Nodes",
 			"type": "JSON",
 			"settings": {
-				"url": "http://127.0.0.1:9200/_nodes/stats/",
+				"url": "/_nodes/stats/",
 				"use_thingproxy": false,
 				"refresh": 30,
 				"method": "GET"
@@ -214,7 +214,7 @@
 			"name": "Search Ping",
 			"type": "JSON",
 			"settings": {
-				"url": "http://127.0.0.1:9200/_search?size=0",
+				"url": "/_search?size=0",
 				"use_thingproxy": false,
 				"refresh": 30,
 				"method": "GET"
@@ -224,7 +224,7 @@
 			"name": "Indices",
 			"type": "JSON",
 			"settings": {
-				"url": "http://127.0.0.1:9200/_nodes/stats/indices/docs,get,search",
+				"url": "/_nodes/stats/indices/docs,get,search",
 				"use_thingproxy": false,
 				"refresh": 30,
 				"method": "GET"
