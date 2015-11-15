@@ -496,6 +496,10 @@ var freeboard = (function()
 		{
 			theFreeboardModel.loadDashboard(configuration, callback);
 		},
+		loadDashboardList   : function()
+		{
+			theFreeboardModel.loadDashboardList();
+		},
 		serialize           : function()
 		{
 			return theFreeboardModel.serialize();
