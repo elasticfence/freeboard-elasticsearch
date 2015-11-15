@@ -279,8 +279,10 @@ function FreeboardModel(datasourcePlugins, widgetPlugins, freeboardUI)
 		var siblingsShown = target.data('siblings-shown') || false;
 		if(!siblingsShown){
 			$(event.currentTarget).siblings('label').fadeIn('slow');
+			$(event.currentTarget).siblings('input').fadeIn('slow');
 		}else{
 			$(event.currentTarget).siblings('label').fadeOut('slow');
+			$(event.currentTarget).siblings('input').fadeOut('slow');
 		}
 		target.data('siblings-shown', !siblingsShown);
 	}
@@ -301,6 +303,51 @@ function FreeboardModel(datasourcePlugins, widgetPlugins, freeboardUI)
 		a.target="_self";
 		a.click();
 	}
+
+        this.saveDashboardtoES = function(_thisref, event)
+        {
+               	var dashboard = $(event.currentTarget).siblings('input')[0].value;
+               	dashboard = dashboard.replace(/([^a-z0-9]+)/gi, '');
+               	var panel = self.serialize(); panel.title = dashboard;
+                if (!dashboard | dashboard === ""){ 
+                    return;
+                } else {
+                    $.ajax({
+                        url: '/freeboard/dashboards/'+dashboard,
+                        type: 'POST',
+                       	data: JSON.stringify(panel),
+                        success: function(data) {
+                                console.log('Dashboard saved to ES ('+dashboard+')')
+                                var win = window.open('#source='+dashboard, '_blank');
+                  		win.focus();
+                       	}
+                    });
+               	}
+                $(event.currentTarget).siblings('label')[0].click();
+        }
+
+       this.loadDashboardList = function()
+        {
+                var dashboards = [];
+                $.ajax({
+                       	type:"GET",
+                        dataType:"json",
+                        url:"/freeboard/dashboards/_search",
+                        success:function (data) {
+                            if(data.hits.total > 0){
+                                data.hits.hits.forEach(function(entry) {
+                                        dashboards.push(entry._id);
+                               	});
+                               	console.log('Dashboard list loaded from ES ('+dashboards+')')
+                                return dashboards;
+                            } else { return dashboards; }
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                            console.log("Error reading Dashboards: " + textStatus+", " + errorThrown);
+                            return;
+                        }
+                });
+        }
 
 	this.addDatasource = function(datasource)
 	{
