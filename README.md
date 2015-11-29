@@ -1,5 +1,5 @@
 # freeboard-elasticsearch
-Simple [Freeboard](https://github.com/Freeboard/freeboard) dashboards plugin for [Elasticsearch](https://github.com/elastic/elasticsearch) DYI monitoring and embedded devices _(experimental)_
+Simple [Freeboard](https://github.com/Freeboard/freeboard) dashboards plugin for [Elasticsearch](https://github.com/elastic/elasticsearch) DYI monitoring on embedded devices _(experimental)_
 
 
 ## Installing on an Elasticsearch instance:
