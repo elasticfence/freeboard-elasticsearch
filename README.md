@@ -1,10 +1,10 @@
 # freeboard-elasticsearch
-Simple [Freeboard](https://github.com/Freeboard/freeboard) dashboards plugin for [Elasticsearch](https://github.com/elastic/elasticsearch) DYI monitoring _(experimental)_
+Simple [Freeboard](https://github.com/Freeboard/freeboard) dashboards plugin for [Elasticsearch](https://github.com/elastic/elasticsearch) DYI monitoring and embedded devices _(experimental)_
 
 
 ## Installing on an Elasticsearch instance:
 <pre>
-./elasticsearch/bin/plugin install lmangani/freeboard-elasticsearch/
+./elasticsearch/bin/plugin install qxip/freeboard-elasticsearch/
 </pre>
 
 ## Usage:
