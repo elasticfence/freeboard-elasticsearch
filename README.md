@@ -4,7 +4,7 @@ Simple [Freeboard](https://github.com/Freeboard/freeboard) dashboards plugin for
 
 ## Installing on an Elasticsearch instance:
 <pre>
-./elasticsearch/bin/plugin install qxip/freeboard-elasticsearch/
+./elasticsearch/bin/plugin install elasticfence/freeboard-elasticsearch/
 </pre>
 
 ## Usage:
